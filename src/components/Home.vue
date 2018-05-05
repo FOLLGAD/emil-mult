@@ -1,6 +1,11 @@
 <template>
   <div class="container">
+    <h1>Mult</h1>
+    <div class="play-container">
+      <router-link to="/play" class="link"><button class="button">Play</button></router-link>
+    </div>
     <div class="scoreboard-container">
+      <h2>Scoreboard</h2>
 			<div class="scoreboard-tabs container">
 				<div class="tab" :class="type=='last' && 'active'" @click="type='last'">Last</div>
 				<div class="tab" :class="type=='daily' && 'active'" @click="type='daily'">Daily</div>
@@ -10,11 +15,6 @@
 			<div>
 				<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
 			</div>
-    </div>
-    <div class="container">
-      <div>
-        <router-link to="/play" class="link"><button class="button">Play</button></router-link>
-      </div>
     </div>
     <div class="mt col" v-if="registeredTime > 0">
 			<div>
@@ -86,6 +86,9 @@ export default {
   justify-content: center;
   flex-direction: column;
   justify-items: center;
+}
+.play-container {
+  margin-bottom: 2rem;
 }
 .mh-auto {
   margin: auto;
