@@ -2,10 +2,9 @@
   <div class="container">
     <div class="scoreboard-container">
 			<div class="scoreboard-tabs container">
-				<div class="tab" :class="type=='last' && 'active'" @click="type='last'">Last</div>
-				<div class="tab" :class="type=='daily' && 'active'" @click="type='daily'">Daily</div>
-				<div class="tab" :class="type=='weekly' && 'active'" @click="type='weekly'">Weekly</div>
-				<div class="tab" :class="type=='all-time' && 'active'" @click="type='all-time'">All time</div>
+				<div v-for="tab in ['last', 'daily', 'weekly', 'all-time']" :key="tab" class="tab" :class="{ active: type == tab }" @click="type = tab">
+					{{ tab | sentence }}
+				</div>
 			</div>
 			<div>
 				<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
@@ -61,6 +60,13 @@ export default {
         .catch(err => {
           this.posting = false;
         });
+    }
+  },
+  filters: {
+    sentence: function(value) {
+      if (!value) return "";
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1).replace("-", " ");
     }
   },
   data() {
