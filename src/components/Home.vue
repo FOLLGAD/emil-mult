@@ -102,7 +102,7 @@ export default {
 }
 .tab {
   padding: 1rem;
-  margin: 1rem;
+  margin: 0.5rem;
   cursor: pointer;
   border-radius: 1em;
 }
@@ -111,7 +111,7 @@ export default {
 }
 .active {
   background-color: var(--blue);
-  color: white;
+  color: #eee;
 }
 h2 {
   margin-top: 0;
