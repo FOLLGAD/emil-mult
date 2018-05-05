@@ -43,4 +43,7 @@ body {
   overflow-y: auto;
   margin: 0;
 }
+::selection {
+	background-color: var(--blue-light);
+}
 </style>

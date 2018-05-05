@@ -1,16 +1,14 @@
 <template>
   <div class="spread">
 		<div class="container">
-			<header-text>
-				Mult
-			</header-text>
+			<header-text large>Mult</header-text>
 			<div class="container">
 				<h2>Scoreboard</h2>
-				<ul class="scoreboard-tabs container">
-					<a v-for="tab in ['last', 'daily', 'weekly', 'all-time']" :key="tab" href="javascript:void(0)" class="link tab" tabindex="0" @click="type = tab" :class="{ active: type == tab }">
+				<div class="scoreboard-tabs container">
+					<a v-for="tab in ['last', 'daily', 'weekly', 'all-time']" :key="tab" href="javascript:void(0)" class="link tab" @click="type = tab" :class="{ active: type == tab }">
 						{{ tab | sentence }}
 					</a>
-				</ul>
+				</div>
 				<div class="mb-2">
 					<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
 				</div>
@@ -21,7 +19,7 @@
 					<p>Your time was {{ registeredTime }} seconds</p>
 				</div>
 				<input v-model="name" class="number-input mb-2" type="text" autofocus="true" placeholder="Enter a name" />
-				<styled-button @click="postResult">Post</styled-button>
+				<styled-button :onclick="postResult">Post</styled-button>
 			</div>
 			<div class="mb-2">
 				<styled-button :onclick="() => $router.push('/play')">

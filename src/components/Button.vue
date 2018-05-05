@@ -1,5 +1,5 @@
 <template>
-	<a href="javascript:void(0)" tabindex="0" @click="onclick" class="button link" :class="{ uppercase }">
+	<a href="javascript:void(0)" @click="onclick" class="button link" :class="{ uppercase }">
 		<slot></slot>
 	</a>
 </template>
