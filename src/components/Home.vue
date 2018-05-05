@@ -11,7 +11,7 @@
 						{{ tab | sentence }}
 					</a>
 				</ul>
-				<div>
+				<div class="mb-2">
 					<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
 				</div>
 			</div>

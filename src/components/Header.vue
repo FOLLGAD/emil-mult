@@ -15,5 +15,6 @@ export default {
 		text-shadow: .2rem .2rem .1rem rgb(180, 177, 170);
 		font-size: 5rem;
 		margin: 0;
+		margin: 1rem 0 .5rem 0;
 	}
 </style>
