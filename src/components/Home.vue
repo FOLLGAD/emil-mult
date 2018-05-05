@@ -101,15 +101,17 @@ export default {
   flex-direction: row;
 }
 .tab {
-  padding: 0.5rem;
+  padding: 1rem;
+  margin: 1rem;
   cursor: pointer;
   border-radius: 1em;
 }
-.tab:hover {
+.tab:hover:not(.active) {
   background-color: rgba(120, 120, 120, 0.1);
 }
 .active {
-  background-color: rgba(120, 120, 120, 0.1);
+  background-color: var(--blue);
+  color: white;
 }
 h2 {
   margin-top: 0;
