@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+	<router-view/>
 </template>
 
 <script>
@@ -33,18 +31,16 @@ Made with 👽 by @follgad
   --green-dark: #496f5d;
   --green: #4c9f70;
 }
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   text-align: center;
   color: var(--dark);
-}
-html,
-body {
-  height: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
   background-color: var(--background);
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-y: auto;
+  margin: 0;
 }
 </style>

@@ -1,40 +1,48 @@
 <template>
-  <div class="container">
-    <h1>Mult</h1>
-    <div class="play-container">
-      <router-link to="/play" class="link"><button class="button">Play</button></router-link>
-    </div>
-    <div class="scoreboard-container">
-      <h2>Scoreboard</h2>
-			<div class="scoreboard-tabs container">
-				<div v-for="tab in ['last', 'daily', 'weekly', 'all-time']" :key="tab" class="tab" :class="{ active: type == tab }" @click="type = tab">
-					{{ tab | sentence }}
+  <div class="spread">
+		<div class="container">
+			<header-text>
+				Mult
+			</header-text>
+			<div class="container">
+				<h2>Scoreboard</h2>
+				<ul class="scoreboard-tabs container">
+					<a v-for="tab in ['last', 'daily', 'weekly', 'all-time']" :key="tab" href="javascript:void(0)" class="link tab" tabindex="0" @click="type = tab" :class="{ active: type == tab }">
+						{{ tab | sentence }}
+					</a>
+				</ul>
+				<div>
+					<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
 				</div>
 			</div>
-			<div>
-				<score-board class="mh-auto scoreboard" :type="type" ref="scoreboard" />
+			<div class="col" v-if="registeredTime > 0 && !posted">
+				<div>
+					<h2>Your result</h2>
+					<p>Your time was {{ registeredTime }} seconds</p>
+				</div>
+				<input v-model="name" class="number-input mb-2" type="text" autofocus="true" placeholder="Enter a name" />
+				<styled-button @click="postResult">Post</styled-button>
 			</div>
-    </div>
-    <div class="mt col" v-if="registeredTime > 0">
-			<div>
-				<h2>Your result</h2>
-				<p>Your time was {{ registeredTime }} seconds</p>
+			<div class="mb-2">
+				<styled-button :onclick="() => $router.push('/play')">
+					Play
+				</styled-button>
 			</div>
-			<input v-model="name" class="number-input" type="text" autofocus="true" placeholder="Enter a name" />
-			<button class="button" @click="postResult">Post</button>
-    </div>
+		</div>
 		<div class="grey"><span>Made by Empinini ;)</span></div>
   </div>
 </template>
 
 <script>
 import ScoreBoard from "@/components/ScoreBoard";
-import BInput from "@/components/Input";
+import StyledButton from "@/components/Button";
+import HeaderText from "@/components/Header";
 
 export default {
   components: {
     ScoreBoard,
-    BInput
+    HeaderText,
+    StyledButton
   },
   props: {
     registeredTime: Number,
@@ -43,7 +51,9 @@ export default {
   },
   methods: {
     postResult() {
-      if (this.posting) return;
+      if (this.posting || this.posted) return;
+
+      this.posting = true;
 
       this.$http
         .post("/scores", {
@@ -53,9 +63,9 @@ export default {
           name: this.name
         })
         .then(d => {
-          this.registeredTime = null;
-          this.posting = true;
           this.$refs.scoreboard.fetchScoreboard();
+          this.posting = false;
+          this.posted = true;
         })
         .catch(err => {
           this.posting = false;
@@ -73,27 +83,31 @@ export default {
     return {
       name: "",
       posting: false,
-      type: "all-time"
+      type: "all-time",
+      posted: false
     };
   }
 };
 </script>
 
 <style scoped>
+.spread {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 100vh;
+}
 .grey {
   text-align: center;
-  bottom: 2em;
-  width: 100%;
-  position: absolute;
   opacity: 0.4;
+  padding: 1rem;
 }
 .container {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  justify-items: center;
 }
-.play-container {
+.mb-2 {
   margin-bottom: 2rem;
 }
 .mh-auto {
@@ -105,11 +119,13 @@ export default {
 }
 .tab {
   padding: 1rem;
-  margin: 0.5rem;
   cursor: pointer;
-  border-radius: 1em;
+  border-radius: 1rem;
+  margin: 0.5rem;
+	color: inherit;
 }
-.tab:hover:not(.active) {
+.tab:hover:not(.active),
+.tab:focus:not(.active) {
   background-color: rgba(120, 120, 120, 0.1);
 }
 .active {
@@ -119,36 +135,6 @@ export default {
 h2 {
   margin-top: 0;
   margin-bottom: 0.4rem;
-}
-
-.button {
-  /* text-transform: uppercase; */
-  padding: 1rem 2rem;
-  background-color: var(--blue);
-  border-radius: 0.8rem;
-  color: #eee;
-  letter-spacing: 0.2rem;
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 0.5rem var(--blue-dark);
-  margin-bottom: 0.8rem;
-  margin-top: 1rem;
-  transition: all 100ms ease;
-}
-.button:hover {
-  transform: translateY(0.5rem);
-  box-shadow: 0 0 var(--blue-dark);
-}
-.button:active:hover {
-  background-color: var(--blue-dark);
-}
-
-.link {
-  text-decoration: none;
-}
-.mt {
-  margin-top: 1rem;
 }
 input {
   border: none;
@@ -162,6 +148,11 @@ input {
   text-align: center;
   align-items: center;
   background-color: #eee;
-  padding: 2em;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.link {
+  text-decoration: none;
+  display: inline-block;
 }
 </style>
