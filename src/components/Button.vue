@@ -33,7 +33,8 @@ export default {
   transition: all 100ms ease;
   display: inline-block;
 }
-.button:hover {
+.button:hover,
+.button:focus {
   transform: translateY(0.3rem);
   box-shadow: 0 0.2rem var(--blue-dark);
 }
