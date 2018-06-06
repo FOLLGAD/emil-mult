@@ -26,7 +26,7 @@ export default {
   color: #eee;
   letter-spacing: 0.2rem;
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   cursor: pointer;
 	margin-bottom: 0.5rem;
   box-shadow: 0 0.5rem var(--blue-dark);

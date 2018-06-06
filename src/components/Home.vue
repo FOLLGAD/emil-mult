@@ -118,9 +118,9 @@ export default {
 .tab {
   padding: 1rem;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 2rem;
   margin: 0.5rem;
-	color: inherit;
+  color: inherit;
 }
 .tab:hover:not(.active),
 .tab:focus:not(.active) {
@@ -148,6 +148,7 @@ input {
   background-color: #eee;
   padding: 2rem;
   margin: 2rem 0;
+  box-shadow: #9993 0 1rem 1rem;
 }
 .link {
   text-decoration: none;
