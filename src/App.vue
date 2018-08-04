@@ -8,7 +8,7 @@ export default {
   created() {
     console.log(`
 ========================
-Made with 👽 by @follgad
+Made with 🎪 by @follgad
 ========================
 		`);
     console.log("https://github.com/follgad");

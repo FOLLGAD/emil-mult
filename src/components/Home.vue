@@ -1,5 +1,5 @@
 <template>
-  <div class="spread">
+	<div class="spread">
 		<div class="container">
 			<header-text large>Mult</header-text>
 			<div class="container">
@@ -27,8 +27,10 @@
 				</styled-button>
 			</div>
 		</div>
-		<div class="grey"><span>Made by Empinini ;)</span></div>
-  </div>
+		<div class="grey">
+			<span>Made by Empinini ;)</span>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -129,6 +131,7 @@ export default {
 .active {
   background-color: var(--blue);
   color: #eee;
+  box-shadow: 0.2rem 0.2rem 0.4rem #6e6e6e4d;
 }
 h2 {
   margin-top: 0;
